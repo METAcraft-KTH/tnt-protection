@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "leddy231-tntprotection",
+  "version": "1.0.0",
+
+  "name": "TNT Protection",
+  "description": "TNT Will not damage blocks at z > -5",
+  "authors": [
+    "Leddy231"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/tntprotection/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "se.leddy231.tntprotection.TntProtection"
+    ]
+  },
+  "mixins": [
+    "tntprotection.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+
+  }
+}
