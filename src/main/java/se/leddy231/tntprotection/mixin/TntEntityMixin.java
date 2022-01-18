@@ -16,7 +16,7 @@ public class TntEntityMixin {
     private void explode(CallbackInfo ci) {
 		TntEntity e = (TntEntity) (Object) this;
 		BlockPos pos = e.getBlockPos();
-		if (pos.getZ() > -5 && !ProtectionStateManager.instance.isWhitelisted(pos)) {
+		if (pos.getZ() > -5 && !ProtectionStateManager.instance.isWhitelisted(pos, e.getEntityWorld())) {
 			ci.cancel();
         	e.world.createExplosion(e, e.getX(), e.getBodyY(0.0625), e.getZ(), 4.0f, Explosion.DestructionType.NONE);
 		}

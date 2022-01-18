@@ -11,6 +11,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -154,12 +155,15 @@ public class Commands {
             PlayerEntity player = context.getSource().getPlayer();
             BlockPos pos = player.getBlockPos();
             ProtectionStateManager manager = ProtectionStateManager.instance;
-            for (WhitelistArea area : manager.getAreas()) {
-                if (area.isInside(pos)) {
-                    player.sendMessage(new LiteralText("Inside area " + area.toChat()), false);
-                    return 0;
+            if (player.getEntityWorld().getRegistryKey().equals(World.OVERWORLD)) {
+                for (WhitelistArea area : manager.getAreas()) {
+                    if (area.isInside(pos)) {
+                        player.sendMessage(new LiteralText("Inside area " + area.toChat()), false);
+                        return 0;
+                    }
                 }
             }
+
             player.sendMessage(new LiteralText("Position not in whitelisted area"), false);
         } catch (Exception e) {
             TntProtection.LOGGER.error("Error during areas test command");

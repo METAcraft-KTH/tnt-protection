@@ -48,7 +48,10 @@ public class ProtectionStateManager extends PersistentState{
         return false;
     }
 
-    public boolean isWhitelisted(BlockPos pos) {
+    public boolean isWhitelisted(BlockPos pos, World world) {
+        if (!world.getRegistryKey().equals(World.OVERWORLD)) {
+            return false;
+        }
         for (WhitelistArea area : areas) {
             if (area.isInside(pos)) {
                 return true;
